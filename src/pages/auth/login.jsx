@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import './Login.css'; // Memanggil file CSS yang dibuat di atas
+import './Login.css'; // Memanggil file CSS
 
 const Login = () => {
-    // 1. Inisialisasi State (Hanya username dan password, role dihapus)
+    // 1. Inisialisasi State (Hanya username dan password)
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -31,17 +31,28 @@ const Login = () => {
 
             // 3. Logika utama: Menggunakan response.ok agar sinkron dengan backend
             if (response.ok) {
+                
+                // MENGAMBIL DAN MEMBERSIHKAN ROLE DARI BACKEND (Jurus Sapu Jagat)
+                const rawRole = res.role || (res.user && res.user.role) || '';
+                const userRole = String(rawRole).toLowerCase().trim();
+                
+                // Mengambil nama user
+                const userName = res.nama_lengkap || (res.user && res.user.nama_lengkap) || 'Pengguna';
+
+                // --- PENAMBAHAN LOCAL STORAGE ---
+                localStorage.setItem('userRole', userRole);
+                localStorage.setItem('userName', userName);
+                // --------------------------------
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Berhasil Masuk!',
-                    text: res.message || `Selamat datang, ${res.nama_lengkap || 'Pengguna'}`,
+                    text: res.message || `Selamat datang, ${userName}`,
                     showConfirmButton: false,
                     timer: 2000,
                     timerProgressBar: true
                 }).then(() => {
-                    // Redirect berdasarkan role yang dikirim balik oleh backend
-                    const userRole = res.role;
-
+                    // Redirect berdasarkan role yang sudah dibersihkan
                     if (userRole === 'admin') {
                         window.location.href = '/admin/dashboard';
                     } else if (userRole === 'kepala sekolah' || userRole === 'pimpinan') {
