@@ -53,7 +53,7 @@ const Sidebar = () => {
                 {(role === 'admin' || role === 'petugas') && (
                     <>
                         <div className="menu-header">Master Data</div>
-                        <NavLink to={`/${role}/barang`} className="nav-link">
+                        <NavLink to={`/${role}/DataBarang`} className="nav-link">
                             <i className="fas fa-box"></i> {role === 'admin' ? 'Data Barang' : 'Stok Barang'}
                         </NavLink>
                         <NavLink to={`/${role}/kategori`} className="nav-link">
