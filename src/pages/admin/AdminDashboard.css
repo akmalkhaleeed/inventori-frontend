@@ -5,6 +5,15 @@
     padding: 40px;
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Penyesuaian banner untuk layar HP agar tidak sesak */
+@media (max-width: 768px) {
+    .admin-banner {
+        padding: 25px;
+    }
 }
 
 .admin-card {
@@ -12,14 +21,15 @@
     border-radius: 20px;
     background: white;
     padding: 25px;
-    transition: 0.3s;
+    transition: all 0.3s ease;
     border-bottom: 4px solid transparent;
     height: 100%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); /* Bayangan halus bawaan */
 }
 
 .admin-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 .card-primary { border-bottom-color: #6366f1; }
@@ -32,12 +42,14 @@
     padding: 25px;
     border: 1px solid #e2e8f0;
     height: 100%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
 }
 
 .icon-circle {
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%; /* Memastikan bentuknya bulat sempurna */
 }

@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-body { background: #f1f5f9; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+}
+
+body { 
+    background: #f1f5f9; 
+    min-height: 100vh; 
+}
+
+/* Tambahkan ini agar aplikasi React membentang penuh ke kanan */
+#root {
+    width: 100%;
+    min-height: 100vh;
+}
