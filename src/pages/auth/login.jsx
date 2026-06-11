@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import './Login.css'; // Memanggil file CSS
 
 const Login = () => {
-    // 1. Inisialisasi State (Hanya username dan password)
+    // 1. Inisialisasi State
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -29,20 +29,28 @@ const Login = () => {
 
             const res = await response.json();
 
-            // 3. Logika utama: Menggunakan response.ok agar sinkron dengan backend
+            // 3. Logika utama
             if (response.ok) {
                 
-                // MENGAMBIL DAN MEMBERSIHKAN ROLE DARI BACKEND (Jurus Sapu Jagat)
+                // MENGAMBIL DAN MEMBERSIHKAN ROLE DARI BACKEND
                 const rawRole = res.role || (res.user && res.user.role) || '';
                 const userRole = String(rawRole).toLowerCase().trim();
                 
                 // Mengambil nama user
-                const userName = res.nama_lengkap || (res.user && res.user.nama_lengkap) || 'Pengguna';
+                const userName = res.nama_lengkap || (res.user && res.user.nama_lengkap) || (res.user && res.user.name) || 'Pengguna';
 
-                // --- PENAMBAHAN LOCAL STORAGE ---
+                // --- PENAMBAHAN LOCAL STORAGE (JURUS SAPU JAGAT) ---
+                
+                // 1. Simpan Token (Kunci Utama untuk API)
+                const apiToken = res.access_token || res.token || (res.data && res.data.token) || (res.data && res.data.access_token);
+                if (apiToken) {
+                    localStorage.setItem('token', apiToken);
+                }
+                
+                // 2. Simpan Role & Nama
                 localStorage.setItem('userRole', userRole);
                 localStorage.setItem('userName', userName);
-                // --------------------------------
+                // ---------------------------------------------------
 
                 Swal.fire({
                     icon: 'success',
@@ -52,7 +60,7 @@ const Login = () => {
                     timer: 2000,
                     timerProgressBar: true
                 }).then(() => {
-                    // Redirect berdasarkan role yang sudah dibersihkan
+                    // Redirect berdasarkan role
                     if (userRole === 'admin') {
                         window.location.href = '/admin/dashboard';
                     } else if (userRole === 'kepala sekolah' || userRole === 'pimpinan') {
