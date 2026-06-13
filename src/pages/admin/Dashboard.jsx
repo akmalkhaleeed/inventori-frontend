@@ -33,13 +33,12 @@ const AdminDashboard = () => {
                     resTransaksi.json()
                 ]);
 
-                // 3. Pastikan datanya berbentuk Array (Asumsi Akmal menaruhnya di dalam .data)
+                // 3. Pastikan datanya berbentuk Array
                 const users = dataUser.data || [];
                 const barangs = dataBarang.data || [];
                 const transaksis = dataTransaksi.data || [];
 
-                // 4. Hitung Total Stok (Menjumlahkan seluruh angka 'stok' dari semua barang)
-                // Jika backend Akmal hanya menghitung macam barang, ganti jadi barangs.length
+                // 4. Hitung Total Stok
                 const hitungTotalStok = barangs.reduce((total, item) => total + (Number(item.stok) || 0), 0);
 
                 setStats({
@@ -48,16 +47,16 @@ const AdminDashboard = () => {
                     totalTransaksi: transaksis.length
                 });
 
-                // 5. Filter Stok Kritis (Ambil barang yang stoknya di bawah atau sama dengan 5)
-                const barangKritis = barangs.filter(b => Number(b.stok) <= 5).slice(0, 3); // Ambil 3 teratas
+                // 5. Filter Stok Kritis
+                const barangKritis = barangs.filter(b => Number(b.stok) <= 5).slice(0, 3);
                 setLowStock(barangKritis.length > 0 ? barangKritis : []);
 
                 // 6. Ambil 4 Transaksi Terakhir untuk tabel
                 setRecentActivities(transaksis.slice(0, 4));
 
             } catch (error) {
-                console.error("Gagal menarik data dari Akmal:", error);
-                loadDummyData(); // Tetap panggil dummy kalau error
+                console.error("Gagal menarik data:", error);
+                loadDummyData(); 
             } finally {
                 setIsLoading(false);
             }
@@ -70,12 +69,19 @@ const AdminDashboard = () => {
                 { id: 2, nama_barang: 'Kertas HVS A4 70gsm (DUMMY)', stok: 5 }
             ]);
             setRecentActivities([
-                { id: 1, nama_petugas: 'Budi (DUMMY)', nama_barang: 'Kabel VGA 15m', jenis: 'masuk', waktu: '14 Jun, 09:30' }
+                { id_transaksi: 1, name: 'Budi (DUMMY)', nama_barang: 'Kabel VGA 15m', jenis_transaksi: 'masuk', tanggal_transaksi: '2024-06-14T09:30:00' }
             ]);
         };
 
         fetchSemuaData();
     }, []);
+
+    // Fungsi bantu untuk format tanggal
+    const formatTanggal = (tanggal) => {
+        if (!tanggal) return '-';
+        const dateObj = new Date(tanggal);
+        return dateObj.toLocaleString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) + ' WIB';
+    };
 
     return (
         <MasterLayout>
@@ -87,7 +93,7 @@ const AdminDashboard = () => {
                         </span>
                         <h1 className="fw-bold mb-2">Pusat Kendali Admin</h1>
                         <p className="opacity-75 mb-0">
-                            Halo, <strong className="text-warning">{userName}</strong>. Pantau pergerakan aset sekolah hari ini.
+                            Halo, <strong className="text-warning">{userName}</strong>. Pantau pergerakan aset hari ini.
                         </p>
                     </div>
                     <div className="col-lg-5 text-lg-end mt-4 mt-lg-0">
@@ -157,7 +163,7 @@ const AdminDashboard = () => {
                             <div className="text-center py-4 text-muted small">Memuat data...</div>
                         ) : lowStock.length > 0 ? (
                             lowStock.map((item, index) => (
-                                <div key={item.id || index} className="d-flex align-items-center mb-3 p-3 border rounded-3 bg-light">
+                                <div key={item.id_barang || index} className="d-flex align-items-center mb-3 p-3 border rounded-3 bg-light">
                                     <div className="flex-grow-1">
                                         <h6 className="mb-1 fw-bold small">{item.nama_barang || item.nama}</h6>
                                         <span className="badge bg-danger bg-opacity-10 text-danger rounded-pill px-2 py-1" style={{ fontSize: '11px' }}>
@@ -198,15 +204,23 @@ const AdminDashboard = () => {
                                         <tr><td colSpan="3" className="text-center py-4 text-muted small">Memuat aktivitas...</td></tr>
                                     ) : recentActivities.length > 0 ? (
                                         recentActivities.map((act, index) => (
-                                            <tr key={act.id || index} className="border-bottom">
+                                            <tr key={act.id_transaksi || index} className="border-bottom">
                                                 <td className="ps-3 py-3">
-                                                    <div className="fw-bold small text-dark">{act.nama_petugas || act.user_id || 'Sistem'}</div>
-                                                    <div className="small text-muted" style={{ fontSize: '11px' }}>{act.waktu || act.created_at}</div>
+                                                    {/* PERBAIKAN: Menangkap 'name' dari controller */}
+                                                    <div className="fw-bold small text-dark">{act.name || 'Sistem'}</div>
+                                                    
+                                                    {/* PERBAIKAN: Menangkap 'tanggal_transaksi' yang diformat */}
+                                                    <div className="small text-muted" style={{ fontSize: '11px' }}>
+                                                        {formatTanggal(act.tanggal_transaksi || act.created_at)}
+                                                    </div>
                                                 </td>
-                                                <td className="small text-secondary py-3">{act.nama_barang || act.barang_id || '-'}</td>
+                                                
+                                                <td className="small text-secondary py-3 fw-semibold">{act.nama_barang || '-'}</td>
+                                                
                                                 <td className="py-3">
-                                                    <span className={`badge rounded-pill px-3 py-2 ${(!act.jenis || act.jenis === 'masuk') ? 'bg-success bg-opacity-10 text-success' : 'bg-danger bg-opacity-10 text-danger'}`} style={{ fontSize: '10px' }}>
-                                                        {(act.jenis || 'TERCATAT').toUpperCase()}
+                                                    {/* PERBAIKAN: Menangkap 'jenis_transaksi' */}
+                                                    <span className={`badge rounded-pill px-3 py-2 ${(act.jenis_transaksi === 'masuk') ? 'bg-success bg-opacity-10 text-success' : 'bg-danger bg-opacity-10 text-danger'}`} style={{ fontSize: '10px' }}>
+                                                        {(act.jenis_transaksi || 'TERCATAT').toUpperCase()}
                                                     </span>
                                                 </td>
                                             </tr>
