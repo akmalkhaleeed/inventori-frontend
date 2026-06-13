@@ -11,6 +11,9 @@ import Users from './pages/admin/Users';
 import BarangMasuk from './pages/admin/BarangMasuk';
 import BarangKeluar from './pages/admin/BarangKeluar';
 
+// Tambahkan import komponen LaporanTransaksi di sini
+import LaporanTransaksi from './pages/admin/LaporanTransaksi';
+
 function App() {
   return (
     <BrowserRouter>
@@ -27,6 +30,9 @@ function App() {
         {/* Rute Transaksi & Laporan */}
         <Route path="/admin/masuk" element={<BarangMasuk />} />
         <Route path="/admin/keluar" element={<BarangKeluar />} />
+        
+        {/* Tambahkan Rute Laporan Transaksi di sini */}
+        <Route path="/admin/laporan" element={<LaporanTransaksi />} />
       </Routes>
     </BrowserRouter>
   );
