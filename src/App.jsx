@@ -9,6 +9,7 @@ import Kategori from './pages/admin/Kategori';
 import Supplier from './pages/admin/Supplier';
 import Users from './pages/admin/Users';
 import BarangMasuk from './pages/admin/BarangMasuk';
+import BarangKeluar from './pages/admin/BarangKeluar';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         
         {/* Rute Transaksi & Laporan */}
         <Route path="/admin/masuk" element={<BarangMasuk />} />
+        <Route path="/admin/keluar" element={<BarangKeluar />} />
       </Routes>
     </BrowserRouter>
   );
