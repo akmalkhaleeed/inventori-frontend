@@ -7,6 +7,7 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault(); 
@@ -26,22 +27,46 @@ const Login = () => {
             });
 
             const res = await response.json();
+            
+            // Console log ini akan membantu Anda melihat struktur data asli dari Laravel
+            console.log("Response dari Backend API:", res); 
 
-            // KONDISI 1: JIKA LOGIN BERHASIL (Akun Ditemukan & Password Benar)
             if (response.ok) {
+                // Ekstraksi data role dan nama dari response backend
                 const rawRole = res.role || (res.user && res.user.role) || '';
                 const userRole = String(rawRole).toLowerCase().trim();
                 const userName = res.nama_lengkap || (res.user && res.user.nama_lengkap) || (res.user && res.user.name) || 'Pengguna';
+                
+                // EKSTRAKSI ID USER: Mengecek berbagai kemungkinan struktur JSON dari API
+                const userId = res.id_user || 
+                               res.id || 
+                               (res.user && (res.user.id_user || res.user.id)) || 
+                               (res.data && res.data.user && (res.data.user.id_user || res.data.user.id));
 
+                // VALIDASI PENTING: Cegah masuk aplikasi jika ID User tidak terbaca
+                if (!userId) {
+                    console.error("Gagal mendapatkan ID User. Struktur JSON:", res);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Format Data Salah',
+                        text: 'Sistem tidak dapat membaca ID User dari server. Hubungi Admin/Programmer.',
+                        confirmButtonColor: '#6366f1'
+                    });
+                    setIsLoading(false);
+                    return; // Hentikan proses login sampai sini
+                }
+
+                // Simpan Token
                 const apiToken = res.access_token || res.token || (res.data && res.data.token) || (res.data && res.data.access_token);
                 if (apiToken) {
                     localStorage.setItem('token', apiToken);
                 }
                 
+                // Simpan data user ke localStorage (pasti aman karena lolos if di atas)
                 localStorage.setItem('userRole', userRole);
                 localStorage.setItem('userName', userName);
+                localStorage.setItem('id_user', userId);
 
-                // Notifikasi Sukses
                 Swal.fire({
                     icon: 'success',
                     title: 'Berhasil Masuk!',
@@ -50,27 +75,26 @@ const Login = () => {
                     timer: 2000,
                     timerProgressBar: true
                 }).then(() => {
+                    // Navigasi setelah login sukses berdasarkan role
                     if (userRole === 'admin') {
-                        window.location.href = '/admin/dashboard';
-                    } else if (userRole === 'kepala sekolah' || userRole === 'pimpinan') {
-                        window.location.href = '/pimpinan/dashboard';
+                        navigate('/admin/dashboard');
+                    } else if (userRole === 'pimpinan') {
+                        navigate('/pimpinan/dashboard');
                     } else {
-                        window.location.href = '/petugas/dashboard';
+                        navigate('/petugas/dashboard');
                     }
                 });
                 
             } else {
-                // KONDISI 2: JIKA LOGIN GAGAL (Akun tidak ada / Password Salah)
                 Swal.fire({
                     icon: 'error',
                     title: 'Login Gagal',
-                    text: res.message || 'Username atau password yang Anda masukkan salah!',
+                    text: res.message || 'Username atau password salah!',
                     confirmButtonColor: '#6366f1'
                 });
             }
             
         } catch (error) {
-            // KONDISI 3: JIKA SERVER MATI / ERROR JARINGAN
             Swal.fire({
                 icon: 'error',
                 title: 'Terjadi Kesalahan',

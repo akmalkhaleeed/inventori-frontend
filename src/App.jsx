@@ -7,7 +7,8 @@ import AdminDashboard from './pages/admin/Dashboard';
 import DataBarang from './pages/admin/DataBarang';
 import Kategori from './pages/admin/Kategori';
 import Supplier from './pages/admin/Supplier';
-import Users from './pages/admin/Users'; // <-- Tambahan Import Users
+import Users from './pages/admin/Users';
+import BarangMasuk from './pages/admin/BarangMasuk';
 
 function App() {
   return (
@@ -17,10 +18,13 @@ function App() {
         
         {/* Rute Halaman Admin */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/DataBarang" element={<DataBarang />} />
+        <Route path="/admin/databarang" element={<DataBarang />} />
         <Route path="/admin/kategori" element={<Kategori />} />
         <Route path="/admin/supplier" element={<Supplier />} />
-        <Route path="/admin/Users" element={<Users />} /> {/* <-- Tambahan Rute Users */}
+        <Route path="/admin/users" element={<Users />} />
+        
+        {/* Rute Transaksi & Laporan */}
+        <Route path="/admin/masuk" element={<BarangMasuk />} />
       </Routes>
     </BrowserRouter>
   );
