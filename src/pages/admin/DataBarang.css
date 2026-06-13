@@ -1,47 +1,59 @@
-/* Tambahan untuk warna badge */
+/* src/pages/admin/DataBarang.css */
+
+/* ==========================================
+   LAYOUT UTAMA (Tabel & Pencarian)
+   ========================================== */
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.table-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.search-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px 20px;
+    width: 280px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.search-box:focus {
+    border-color: #6366f1;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* ==========================================
+   BADGE STOK BARANG
+   ========================================== */
 .stok-badge {
     padding: 6px 12px;
     border-radius: 8px;
     font-weight: 700;
-    font-size: 10px;
+    font-size: 11px;
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    color: white; /* Badge butuh warna teks putih agar kontras */
+    color: white; 
 }
 
-/* Warna status */
-.stok-aman {
-    background: #22c55e; /* Hijau */
-}
+.stok-aman { background: #22c55e; }
+.stok-warning { background: #f59e0b; }
+.stok-danger { background: #ef4444; }
 
-.stok-warning {
-    background: #f59e0b; /* Kuning/Oranye */
-}
-
-.stok-danger {
-    background: #ef4444; /* Merah */
-}
-
-/* Tambahan untuk tombol aksi */
-.btn-aksi {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    border: none;
-    transition: 0.3s;
-}
-
-.btn-edit {
-    background: #fff7d6;
-    color: #f59e0b;
-}
-
-.btn-hapus {
-    background: #ffe2e2;
-    color: #ef4444;
-}
-
+/* ==========================================
+   TOMBOL AKSI & UTAMA
+   ========================================== */
 .btn-primary-custom {
     background: #6366f1;
     color: white;
@@ -49,4 +61,98 @@
     border-radius: 999px;
     padding: 10px 20px;
     font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-primary-custom:hover {
+    background: #4f46e5;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+}
+
+.btn-aksi {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    border: none;
+    transition: 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tombol Edit: Kuning ke Solid Oranye */
+.btn-edit {
+    background: #fff7d6;
+    color: #f59e0b;
+}
+
+.btn-edit:hover {
+    background: #f59e0b;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Tombol Hapus: Merah Pudar ke Solid Merah */
+.btn-hapus {
+    background: #ffe2e2;
+    color: #ef4444;
+}
+
+.btn-hapus:hover {
+    background: #ef4444;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   MODAL PRO (POP-UP TAMBAH & EDIT)
+   ========================================== */
+.custom-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.4); /* Lebih transparan agar elegan */
+    backdrop-filter: blur(4px); 
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.custom-modal {
+    background: white;
+    width: 100%;
+    max-width: 650px; /* Diperlebar sedikit agar form lega */
+    border-radius: 16px;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh; 
+    overflow: hidden; /* Mengunci konten agar ujung modal tetap bulat */
+}
+
+.custom-modal .modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.custom-modal .modal-body {
+    padding: 24px;
+    overflow-y: auto; 
+    overflow-x: hidden; /* MEMBUNUH SCROLLBAR HORIZONTAL YANG MENGGANGGU */
+}
+
+.custom-modal .modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    background: #f8fafc;
 }
