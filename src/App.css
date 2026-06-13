@@ -1,25 +1,21 @@
 /* src/App.css */
 
-/* Reset Margin dan Padding bawaan browser */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Pastikan body memenuhi seluruh layar dan background abu-abu terang */
 body, html {
   width: 100%;
   height: 100%;
   background-color: #f1f5f9; 
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  overflow-x: hidden; /* Mencegah layar bisa digeser ke kiri/kanan (horizontal scroll) */
+  overflow-x: hidden; 
 }
 
-/* Memastikan akar aplikasi React membentang penuh */
 #root {
   width: 100%;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  /* HAPUS display: flex dan flex-direction: column di sini */
 }
