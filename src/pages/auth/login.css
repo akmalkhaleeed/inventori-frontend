@@ -1,17 +1,23 @@
-body {
-    background: #f1f5f9;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+/* src/pages/auth/Login.css */
+
+/* KONTANER UTAMA MEMENUHI LAYAR */
+.login-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
     height: 100vh;
+    background: #f1f5f9;
+    z-index: 10; /* UBAH JADI 10 AGAR SWEETALERT BISA MUNCUL DI DEPANNYA */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0;
 }
 
 .login-card {
     background: white;
     border-radius: 24px;
-    width: 100%;
+    width: 90%;
     max-width: 400px;
     padding: 40px;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);

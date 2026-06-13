@@ -8,13 +8,19 @@
     font-family: 'Plus Jakarta Sans', sans-serif; 
 }
 
+/* Hapus atau override ini */
 body { 
     background: #f1f5f9; 
-    min-height: 100vh; 
+    min-height: 100vh;
+    /* JANGAN ada display: flex di sini */
 }
 
-/* Tambahkan ini agar aplikasi React membentang penuh ke kanan */
 #root {
     width: 100%;
     min-height: 100vh;
+    display: block; /* Paksa block, bukan flex */
+}
+/* Taruh di paling bawah index.css */
+body {
+    display: block !important;
 }
