@@ -10,8 +10,8 @@ import DataBarangAdmin from './pages/admin/DataBarang';
 import KategoriAdmin from './pages/admin/Kategori'; 
 import SupplierAdmin from './pages/admin/Supplier'; 
 import Users from './pages/admin/Users';
-import BarangMasukAdmin from './pages/admin/BarangMasuk'; // <-- Ubah jadi BarangMasukAdmin
-import BarangKeluar from './pages/admin/BarangKeluar';
+import BarangMasukAdmin from './pages/admin/BarangMasuk'; 
+import BarangKeluarAdmin from './pages/admin/BarangKeluar'; // <-- Ubah jadi BarangKeluarAdmin
 import LaporanTransaksi from './pages/admin/LaporanTransaksi';
 
 // Import Komponen Petugas
@@ -19,7 +19,8 @@ import PetugasDashboard from './pages/petugas/Dashboard';
 import DataBarangPetugas from './pages/petugas/DataBarang'; 
 import KategoriPetugas from './pages/petugas/Kategori'; 
 import SupplierPetugas from './pages/petugas/Supplier'; 
-import BarangMasukPetugas from './pages/petugas/BarangMasuk'; // <-- IMPORT FILE BARANG MASUK PETUGAS DI SINI
+import BarangMasukPetugas from './pages/petugas/BarangMasuk'; 
+import BarangKeluarPetugas from './pages/petugas/BarangKeluar'; // <-- IMPORT FILE BARANG KELUAR PETUGAS DI SINI
 
 function App() {
   return (
@@ -35,8 +36,8 @@ function App() {
         <Route path="/admin/users" element={<Users />} />
         
         {/* Transaksi & Laporan Admin */}
-        <Route path="/admin/masuk" element={<BarangMasukAdmin />} /> {/* <-- Panggil Barang Masuk Admin */}
-        <Route path="/admin/keluar" element={<BarangKeluar />} />
+        <Route path="/admin/masuk" element={<BarangMasukAdmin />} /> 
+        <Route path="/admin/keluar" element={<BarangKeluarAdmin />} /> {/* <-- Panggil Barang Keluar Admin */}
         <Route path="/admin/laporan" element={<LaporanTransaksi />} />
 
 
@@ -45,12 +46,10 @@ function App() {
         <Route path="/petugas/databarang" element={<DataBarangPetugas />} /> 
         <Route path="/petugas/kategori" element={<KategoriPetugas />} /> 
         <Route path="/petugas/supplier" element={<SupplierPetugas />} /> 
-        
-        {/* <-- PANGGIL KOMPONEN BARANG MASUK PETUGAS DI SINI --> */}
         <Route path="/petugas/masuk" element={<BarangMasukPetugas />} /> 
         
-        {/* Petugas masih meminjam komponen Barang Keluar milik Admin sementara ini */}
-        <Route path="/petugas/keluar" element={<BarangKeluar />} />
+        {/* <-- PANGGIL KOMPONEN BARANG KELUAR PETUGAS DI SINI --> */}
+        <Route path="/petugas/keluar" element={<BarangKeluarPetugas />} /> 
 
       </Routes>
     </BrowserRouter>
