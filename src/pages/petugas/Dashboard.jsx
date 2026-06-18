@@ -142,7 +142,7 @@ const PetugasDashboard = () => {
                 <div className="table-responsive">
                     <table className="table align-middle">
                         <thead>
-                            <tr class="text-muted small">
+                            <tr className="text-muted small">
                                 <th>NAMA BARANG</th>
                                 <th>WAKTU</th>
                                 <th>JENIS</th>
