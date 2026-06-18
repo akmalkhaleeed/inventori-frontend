@@ -36,7 +36,7 @@ const Sidebar = () => {
             {/* LOGO */}
             <div className="sidebar-brand">
                 <div className="brand-logo">
-                    <i className={`fas text-white ${role === 'pimpinan' || role === 'kepala sekolah' ? 'fa-chart-pie' : role === 'admin' ? 'fa-layer-group' : 'fa-box-open'}`}></i>
+                    <i className={`fas text-white ${role === 'pimpinan' ? 'fa-chart-pie' : role === 'admin' ? 'fa-layer-group' : 'fa-box-open'}`}></i>
                 </div>
                 <h4 className="mb-0 fw-bold">INVEERA</h4>
             </div>
@@ -45,7 +45,7 @@ const Sidebar = () => {
             <div className="sidebar-menu">
                 
                 {/* MENU DASHBOARD (Bisa diakses semua role) */}
-                <NavLink to={`/${role === 'kepala sekolah' ? 'pimpinan' : role}/dashboard`} className="nav-link">
+                <NavLink to={`/${role}/dashboard`} className="nav-link">
                     <i className="fas fa-th-large"></i> Dashboard
                 </NavLink>
 
@@ -53,7 +53,7 @@ const Sidebar = () => {
                 {(role === 'admin' || role === 'petugas') && (
                     <>
                         <div className="menu-header">Master Data</div>
-                        <NavLink to={`/${role}/DataBarang`} className="nav-link">
+                        <NavLink to={`/${role}/databarang`} className="nav-link">
                             <i className="fas fa-box"></i> {role === 'admin' ? 'Data Barang' : 'Stok Barang'}
                         </NavLink>
                         <NavLink to={`/${role}/kategori`} className="nav-link">
@@ -87,7 +87,7 @@ const Sidebar = () => {
                 )}
 
                 {/* ======= MENU PIMPINAN ======= */}
-                {(role === 'pimpinan' || role === 'kepala sekolah') && (
+                {role === 'pimpinan' && (
                     <>
                         <div className="menu-header">Laporan Inventori</div>
                         <NavLink to="/pimpinan/laporan-stok" className="nav-link">
