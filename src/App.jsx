@@ -6,8 +6,8 @@ import Login from './pages/auth/Login';
 
 // Import Komponen Admin
 import AdminDashboard from './pages/admin/Dashboard';
-import DataBarangAdmin from './pages/admin/DataBarang'; // <-- Alias untuk Data Barang Admin
-import Kategori from './pages/admin/Kategori';
+import DataBarangAdmin from './pages/admin/DataBarang'; 
+import KategoriAdmin from './pages/admin/Kategori'; // <-- Ubah jadi KategoriAdmin
 import Supplier from './pages/admin/Supplier';
 import Users from './pages/admin/Users';
 import BarangMasuk from './pages/admin/BarangMasuk';
@@ -16,7 +16,8 @@ import LaporanTransaksi from './pages/admin/LaporanTransaksi';
 
 // Import Komponen Petugas
 import PetugasDashboard from './pages/petugas/Dashboard';
-import DataBarangPetugas from './pages/petugas/DataBarang'; // <-- Import Data Barang khusus Petugas
+import DataBarangPetugas from './pages/petugas/DataBarang'; 
+import KategoriPetugas from './pages/petugas/Kategori'; // <-- IMPORT FILE BARU KAMU DI SINI
 
 function App() {
   return (
@@ -26,8 +27,8 @@ function App() {
         
         {/* ================= RUTE ADMIN ================= */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/databarang" element={<DataBarangAdmin />} /> {/* <-- Panggil komponen Admin */}
-        <Route path="/admin/kategori" element={<Kategori />} />
+        <Route path="/admin/databarang" element={<DataBarangAdmin />} /> 
+        <Route path="/admin/kategori" element={<KategoriAdmin />} /> {/* <-- Panggil Kategori Admin */}
         <Route path="/admin/supplier" element={<Supplier />} />
         <Route path="/admin/users" element={<Users />} />
         
@@ -39,12 +40,12 @@ function App() {
 
         {/* ================= RUTE PETUGAS ================= */}
         <Route path="/petugas/dashboard" element={<PetugasDashboard />} />
+        <Route path="/petugas/databarang" element={<DataBarangPetugas />} /> 
         
-        {/* Petugas menggunakan komponen Data Barang spesifik miliknya */}
-        <Route path="/petugas/databarang" element={<DataBarangPetugas />} /> {/* <-- Panggil komponen Petugas */}
+        {/* <-- PANGGIL KOMPONEN KATEGORI PETUGAS DI SINI --> */}
+        <Route path="/petugas/kategori" element={<KategoriPetugas />} /> 
         
         {/* Petugas menggunakan komponen operasional lainnya yang sama dengan Admin */}
-        <Route path="/petugas/kategori" element={<Kategori />} />
         <Route path="/petugas/supplier" element={<Supplier />} />
         <Route path="/petugas/masuk" element={<BarangMasuk />} />
         <Route path="/petugas/keluar" element={<BarangKeluar />} />
