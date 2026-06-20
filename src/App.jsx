@@ -28,7 +28,8 @@ import BarangKeluarPetugas from "./pages/petugas/BarangKeluar";
 import PimpinanDashboard from "./pages/pimpinan/PimpinanDashboard";
 import StokOpnamePimpinan from "./pages/pimpinan/StokOpname"; 
 import LaporanBarangMasukPimpinan from "./pages/pimpinan/LaporanBarangMasuk"; 
-import LaporanBarangKeluarPimpinan from "./pages/pimpinan/LaporanBarangKeluar"; // <-- IMPORT FILE BARANG KELUAR DI SINI
+import LaporanBarangKeluarPimpinan from "./pages/pimpinan/LaporanBarangKeluar"; 
+import LaporanBarangTerlarisPimpinan from "./pages/pimpinan/LaporanBarangTerlaris"; // <-- IMPORT FILE BARANG TERLARIS DI SINI
 
 function App() {
   return (
@@ -60,9 +61,10 @@ function App() {
         <Route path="/pimpinan/dashboard" element={<PimpinanDashboard />} />
         <Route path="/pimpinan/stok" element={<StokOpnamePimpinan />} /> 
         <Route path="/pimpinan/laporan-masuk" element={<LaporanBarangMasukPimpinan />} /> 
-        
-        {/* <-- PANGGIL KOMPONEN LAPORAN BARANG KELUAR PIMPINAN DI SINI --> */}
         <Route path="/pimpinan/laporan-keluar" element={<LaporanBarangKeluarPimpinan />} /> 
+        
+        {/* <-- PANGGIL KOMPONEN LAPORAN BARANG TERLARIS PIMPINAN DI SINI --> */}
+        <Route path="/pimpinan/laporan-terlaris" element={<LaporanBarangTerlarisPimpinan />} /> 
         
       </Routes>
     </BrowserRouter>

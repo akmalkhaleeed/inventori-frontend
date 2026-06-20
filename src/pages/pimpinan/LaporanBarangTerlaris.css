@@ -1,0 +1,119 @@
+/* src/pages/pimpinan/LaporanBarangTerlaris.css */
+
+.page-header-terlaris {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+    border-radius: 24px;
+    padding: 35px 40px;
+    margin-bottom: 35px;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header-terlaris::after {
+    content: "";
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    width: 180px;
+    height: 180px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+}
+
+.analysis-card {
+    background: white;
+    border-radius: 20px;
+    padding: 22px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    height: 100%;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.analysis-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    border-color: #bfdbfe;
+}
+
+.rank-badge {
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    font-weight: 800;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.total-box {
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.tips-box {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    border-radius: 24px;
+    padding: 30px;
+}
+
+.icon-tips {
+    background: rgba(255, 255, 255, 0.15);
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+/* ==================================
+   PENGATURAN CETAK (PRINT BROWSER)
+=================================== */
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 15mm;
+    }
+    
+    body { background: white; }
+    
+    .sidebar, .mobile-header, .hide-on-print {
+        display: none !important;
+    }
+
+    .main-content {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .page-header-terlaris {
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+    
+    .analysis-card {
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+    }
+
+    .tips-box {
+        background: #f8fafc !important;
+        color: #0f172a !important;
+        border: 1px dashed #cbd5e1;
+    }
+
+    .icon-tips i { color: #0f172a; }
+}
