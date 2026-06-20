@@ -26,7 +26,7 @@ import BarangKeluarPetugas from "./pages/petugas/BarangKeluar";
 // IMPORT KOMPONEN PIMPINAN (BARU)
 // ==========================================
 import PimpinanDashboard from "./pages/pimpinan/PimpinanDashboard";
-// Nanti kalau Diaz udah bikin halaman laporan pimpinan, import di sini ya
+import StokOpnamePimpinan from "./pages/pimpinan/StokOpname"; // <-- IMPORT FILE STOK OPNAME DI SINI
 
 function App() {
   return (
@@ -56,7 +56,8 @@ function App() {
 
         {/* ================= RUTE PIMPINAN (BARU) ================= */}
         <Route path="/pimpinan/dashboard" element={<PimpinanDashboard />} />
-        {/* Nanti rute tambahan pimpinan seperti laporan stok/masuk/keluar ditaruh di bawah sini */}
+        <Route path="/pimpinan/stok" element={<StokOpnamePimpinan />} /> {/* <-- PANGGIL KOMPONEN DI SINI */}
+        
       </Routes>
     </BrowserRouter>
   );

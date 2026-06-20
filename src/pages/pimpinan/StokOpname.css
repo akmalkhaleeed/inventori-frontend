@@ -1,0 +1,239 @@
+/* src/pages/pimpinan/StokOpname.css */
+
+/* ==================================
+   GAYA DASHBOARD (SAMA SEPERTI SEBELUMNYA)
+=================================== */
+.page-header-gradient {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border-radius: 24px;
+    padding: 35px 40px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header-gradient::after {
+    content: "";
+    position: absolute;
+    right: -50px;
+    top: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+}
+
+.card-summary {
+    background: white;
+    border-radius: 24px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    height: 100%;
+    transition: transform 0.3s;
+}
+
+.card-summary:hover {
+    transform: translateY(-5px);
+}
+
+.icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.card-table {
+    background: white;
+    border-radius: 24px;
+    padding: 30px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+/* ==================================
+   GAYA MODE LAPORAN (KERTAS LANDSCAPE)
+=================================== */
+.report-mode-wrapper {
+    background-color: #dbe1ea;
+    min-height: 100vh;
+    padding-top: 90px;
+    padding-bottom: 40px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.action-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    padding: 16px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .15);
+}
+
+.btn-report {
+    border: none;
+    padding: 9px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    transition: .2s;
+}
+
+.btn-back { background: #334155; color: white; }
+.btn-print { background: #4f46e5; color: white; }
+.btn-pdf { background: #ef4444; color: white; }
+.btn-report:hover { transform: translateY(-1px); opacity: 0.9; }
+
+.paper-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+/* Kertas A4 Landscape */
+.paper {
+    width: 297mm;
+    min-height: 210mm;
+    background: white;
+    padding: 14mm;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, .15);
+    border-radius: 10px;
+    color: #0f172a;
+}
+
+.kop {
+    display: flex;
+    align-items: center;
+    border-bottom: 3px double #0f172a;
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 82px;
+    height: 82px;
+    object-fit: contain;
+    margin-right: 18px;
+}
+
+.kop-text h1 { margin: 0; font-size: 30px; font-weight: 800; line-height: 1.1; color: #0f172a; }
+.kop-text p { margin: 4px 0; font-size: 13px; color: #475569; }
+
+.judul { text-align: center; margin-bottom: 20px; }
+.judul h3 { margin: 0; font-size: 22px; font-weight: 800; }
+.judul p { margin-top: 8px; color: #64748b; font-size: 13px; }
+
+/* Tabel Summary Laporan */
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.summary-table td {
+    border: 1px solid #cbd5e1;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.summary-table .label { background: #f1f5f9; font-weight: 700; color: #334155; }
+.summary-table .value { font-weight: 700; color: #0f172a; }
+
+/* Tabel Utama Laporan */
+.table-laporan {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.table-laporan thead th {
+    background: #0f172a;
+    color: white;
+    padding: 10px 6px;
+    border: 1px solid #1e293b;
+    font-size: 10px;
+    text-align: center;
+}
+
+.table-laporan tbody td {
+    border: 1px solid #cbd5e1;
+    padding: 8px 6px;
+    font-size: 10px;
+    vertical-align: middle;
+}
+
+.table-laporan tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
+/* Status Badges */
+.badge-status {
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 9px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.aman { border: 1px solid #15803d; color: #15803d; background: #f0fdf4; }
+.kritis { border: 1px solid #dc2626; color: #dc2626; background: #fef2f2; }
+.habis { border: 1px solid #334155; color: #334155; background: #f8fafc; }
+
+/* Footer TTD */
+.footer-laporan { margin-top: 35px; }
+.footer-info { font-size: 12px; color: #475569; margin-bottom: 30px; }
+
+.ttd-table { width: 100%; border-collapse: collapse; }
+.ttd-table td { width: 33.33%; text-align: center; font-size: 12px; color: #0f172a; }
+.ttd-table .space { height: 85px; }
+.ttd-table .jabatan { color: #64748b; font-size: 11px; }
+
+/* ==================================
+   PENGATURAN CETAK BROWSER (PRINT)
+=================================== */
+@media print {
+    @page {
+        size: A4 landscape; /* Memaksa printer mendeteksi format Landscape */
+        margin: 10mm;
+    }
+
+    body, html {
+        background: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Sembunyikan elemen web yang tidak perlu diprint */
+    .hide-on-print, .sidebar, .mobile-header {
+        display: none !important;
+    }
+
+    .report-mode-wrapper {
+        padding: 0;
+        background: white;
+    }
+
+    .paper {
+        box-shadow: none;
+        width: 100%;
+        min-height: auto;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    .table-laporan thead th { font-size: 9px; padding: 7px 5px; }
+    .table-laporan tbody td { font-size: 9px; padding: 6px 5px; }
+}
