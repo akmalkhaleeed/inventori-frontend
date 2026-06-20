@@ -104,6 +104,7 @@ const Sidebar = () => {
                         </NavLink>
 
                         <div className="menu-header">Referensi</div>
+                        {/* Rute Supplier yang sudah disesuaikan */}
                         <NavLink to="/pimpinan/supplier" className="nav-link">
                             <i className="fas fa-truck"></i> Daftar Supplier
                         </NavLink>

@@ -1,0 +1,40 @@
+/* src/pages/pimpinan/DaftarSupplier.css */
+
+.page-header-supplier {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    border-radius: 24px;
+    padding: 30px 35px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header-supplier::after {
+    content: "";
+    position: absolute;
+    right: -30px;
+    top: -30px;
+    width: 150px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+}
+
+.card-table-supplier {
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.font-uppercase th {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.supplier-name-view {
+    color: #2563eb;
+    font-weight: 700;
+    font-size: 15px;
+}
