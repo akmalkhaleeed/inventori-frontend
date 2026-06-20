@@ -83,7 +83,7 @@ const StokOpname = () => {
                     <div className="paper" id="area-laporan">
                         <div className="kop">
                             <img 
-                                src="/assets/img/logoinveera.png" 
+                                src="/public/logoinveera.png" 
                                 alt="Logo INVEERA" 
                                 className="logo" 
                                 onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/82?text=Logo'; }}
