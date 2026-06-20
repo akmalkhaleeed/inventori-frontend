@@ -6,7 +6,7 @@ const StokOpname = () => {
     const [barangs, setBarangs] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     
-    // State untuk mengganti mode tampilan
+    // State "Sakti" untuk menggabungkan dua file menjadi satu
     const [showReport, setShowReport] = useState(false);
 
     const fetchData = async () => {
@@ -29,7 +29,7 @@ const StokOpname = () => {
         fetchData();
     }, []);
 
-    // Kalkulasi Summary secara real-time
+    // Kalkulasi Summary secara real-time dari array barangs
     const summary = useMemo(() => {
         let tBarang = barangs.length;
         let tStok = 0;
@@ -51,11 +51,12 @@ const StokOpname = () => {
         return { tBarang, tStok, tAset, sKritis, tProfit };
     }, [barangs]);
 
+    // Fungsi Print Bawaan Browser
     const handlePrint = () => {
         window.print();
     };
 
-    // Format Tanggal
+    // Format Tanggal untuk Kop Laporan
     const todayDateObj = new Date();
     const todayDate = todayDateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' });
     const firstDay = `01 ${todayDateObj.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}`;
@@ -69,25 +70,20 @@ const StokOpname = () => {
     if (showReport) {
         return (
             <div className="report-mode-wrapper">
-                {/* Action Bar */}
                 <div className="action-bar hide-on-print">
                     <h5>Preview Cetak Laporan</h5>
                     <div className="btn-group-report">
                         <button className="btn-report btn-back" onClick={() => setShowReport(false)}>Kembali</button>
                         <button className="btn-report btn-print" onClick={handlePrint}>Print Laporan</button>
-                        {/* Menggunakan Print bawaan browser karena fitur Save as PDF sudah ada di semua browser modern */}
                         <button className="btn-report btn-pdf" onClick={handlePrint}>Download PDF</button>
                     </div>
                 </div>
 
-                {/* Area Kertas A4 Landscape */}
                 <div className="paper-wrapper">
                     <div className="paper" id="area-laporan">
-                        {/* KOP SURAT */}
                         <div className="kop">
-                            {/* Pastikan logo ada di folder public/assets/img/logoinveera.png */}
                             <img 
-                                src="/public/logoinveera.png" 
+                                src="/assets/img/logoinveera.png" 
                                 alt="Logo INVEERA" 
                                 className="logo" 
                                 onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/82?text=Logo'; }}
@@ -100,13 +96,11 @@ const StokOpname = () => {
                             </div>
                         </div>
 
-                        {/* JUDUL LAPORAN */}
                         <div className="judul">
                             <h3>LAPORAN MONITORING INVENTORI BARANG</h3>
                             <p>Periode : {firstDay} - {todayDate}</p>
                         </div>
 
-                        {/* SUMMARY TABLE */}
                         <table className="summary-table">
                             <thead>
                                 <tr>
@@ -128,7 +122,6 @@ const StokOpname = () => {
                             </tbody>
                         </table>
 
-                        {/* MAIN TABLE */}
                         <table className="table-laporan">
                             <thead>
                                 <tr>
@@ -151,7 +144,6 @@ const StokOpname = () => {
                                     const totalNilai = (parseFloat(row.harga_beli) || 0) * (parseInt(row.stok) || 0);
                                     const supplierName = row.nama_supplier || row.supplier?.nama_supplier || '-';
                                     
-                                    // Status Logic
                                     let statusClass = "badge-status aman";
                                     let statusText = "AMAN";
                                     if (row.stok <= 0) {
@@ -183,7 +175,6 @@ const StokOpname = () => {
                             </tbody>
                         </table>
 
-                        {/* FOOTER TTD */}
                         <div className="footer-laporan">
                             <div className="footer-info">
                                 No Dokumen : {noDok} <br/><br/>
@@ -221,7 +212,7 @@ const StokOpname = () => {
     }
 
     // =========================================================================
-    // RENDER: MODE DASHBOARD (UTAMA)
+    // RENDER: MODE DASHBOARD (UTAMA - SUDAH LENGKAP)
     // =========================================================================
     return (
         <MasterLayout>
@@ -274,43 +265,64 @@ const StokOpname = () => {
                     <small className="text-muted">Monitoring stok barang gudang secara realtime.</small>
                 </div>
                 <div className="table-responsive">
-                    <table className="table align-middle mb-0">
+                    <table className="table align-middle mb-0" style={{ minWidth: '1000px' }}>
                         <thead className="table-light">
                             <tr className="small text-muted font-uppercase text-center">
                                 <th>No</th>
                                 <th className="text-start">Nama Barang</th>
+                                <th>Kategori</th>
+                                <th>Supplier</th>
                                 <th>Harga Beli</th>
                                 <th>Harga Jual</th>
+                                <th>Profit/Unit</th>
                                 <th>Stok</th>
+                                <th>Satuan</th>
                                 <th>Total Nilai</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             {isLoading ? (
-                                <tr><td colSpan="6" className="text-center py-5 text-muted"><i className="fas fa-spinner fa-spin me-2"></i> Memuat...</td></tr>
+                                <tr><td colSpan="11" className="text-center py-5 text-muted"><i className="fas fa-spinner fa-spin me-2"></i> Memuat...</td></tr>
                             ) : barangs.length > 0 ? (
                                 barangs.map((row, idx) => {
+                                    const isHabis = row.stok <= 0;
+                                    const isKritis = row.stok > 0 && row.stok <= 5;
+                                    
+                                    const profit = (parseFloat(row.harga_jual) || 0) - (parseFloat(row.harga_beli) || 0);
                                     const totalNilai = (parseFloat(row.harga_beli) || 0) * (parseInt(row.stok) || 0);
+                                    const supplierName = row.nama_supplier || row.supplier?.nama_supplier || '-';
+
                                     return (
                                         <tr key={row.id_barang}>
                                             <td className="text-center text-muted fw-bold">{idx + 1}</td>
-                                            <td>
-                                                <div className="fw-bold text-dark">{row.nama_barang}</div>
-                                                <small className="text-muted">{row.nama_kategori || '-'}</small>
-                                            </td>
-                                            <td className="text-center fw-semibold text-danger">Rp {Number(row.harga_beli).toLocaleString('id-ID')}</td>
-                                            <td className="text-center fw-semibold text-success">Rp {Number(row.harga_jual).toLocaleString('id-ID')}</td>
+                                            <td className="fw-bold text-dark">{row.nama_barang}</td>
+                                            <td className="text-muted small">{row.nama_kategori || '-'}</td>
+                                            <td className="text-muted small">{supplierName}</td>
+                                            
+                                            {/* Warna khusus sesuai PHP Native */}
+                                            <td className="text-center fw-bold text-danger">Rp {Number(row.harga_beli).toLocaleString('id-ID')}</td>
+                                            <td className="text-center fw-bold text-success">Rp {Number(row.harga_jual).toLocaleString('id-ID')}</td>
+                                            <td className="text-center fw-bold" style={{ color: '#0284c7' }}>Rp {profit.toLocaleString('id-ID')}</td>
+                                            
                                             <td className="text-center">
-                                                <span className="badge bg-light text-dark border px-3 py-2 fs-6">
-                                                    {row.stok} <small className="text-muted fw-normal">{row.satuan}</small>
+                                                <span className="bg-light text-dark fw-bold border px-3 py-2 rounded-3">
+                                                    {row.stok}
                                                 </span>
                                             </td>
+                                            <td className="text-center text-muted small">{row.satuan}</td>
+                                            
                                             <td className="text-center fw-bold text-primary">Rp {totalNilai.toLocaleString('id-ID')}</td>
+                                            <td className="text-center">
+                                                {isHabis ? <span className="badge bg-dark px-3 py-2 rounded-pill">Habis</span> : 
+                                                 isKritis ? <span className="badge bg-danger px-3 py-2 rounded-pill">Kritis</span> : 
+                                                 <span className="badge bg-success px-3 py-2 rounded-pill">Aman</span>}
+                                            </td>
                                         </tr>
                                     );
                                 })
                             ) : (
-                                <tr><td colSpan="6" className="text-center py-5 text-muted">Belum ada data barang.</td></tr>
+                                <tr><td colSpan="11" className="text-center py-5 text-muted">Belum ada data barang.</td></tr>
                             )}
                         </tbody>
                     </table>

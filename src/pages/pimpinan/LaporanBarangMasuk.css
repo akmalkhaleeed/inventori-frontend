@@ -1,0 +1,212 @@
+/* src/pages/pimpinan/LaporanBarangMasuk.css */
+
+/* =========================================================================
+   GAYA INTERFACE DASHBOARD (PRE-REPORT)
+========================================================================= */
+.page-header {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    border-radius: 24px;
+    padding: 28px;
+    color: white;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header h3 { font-weight: 700; margin-bottom: 8px; }
+.page-header p { margin: 0; opacity: .85; font-size: 14px; }
+
+.filter-card {
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+    margin-bottom: 24px;
+}
+
+.table-card {
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+}
+
+.tanggal-box-view {
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: inline-block;
+    font-size: 13px;
+}
+
+.barang-name-view { font-weight: 700; color: #0f172a; }
+.supplier-name-view { color: #64748b; font-size: 14px; }
+
+.jumlah-box-view {
+    background: #dcfce7;
+    color: #166534;
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    display: inline-block;
+    font-size: 13px;
+}
+
+/* =========================================================================
+   GAYA MODE REPORT KERTAS (A4 LANDSCAPE MURNI)
+========================================================================= */
+.report-mode-wrapper {
+    background-color: #dbe1ea;
+    min-height: 100vh;
+    padding-top: 90px;
+    padding-bottom: 40px;
+}
+
+.action-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    padding: 16px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, .15);
+}
+
+.action-bar h5 { margin: 0; color: white; font-size: 18px; font-weight: 700; }
+
+.btn-report {
+    border: none;
+    padding: 11px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    transition: .2s;
+}
+
+.btn-back { background: #334155; color: white; }
+.btn-print { background: #4f46e5; color: white; }
+.btn-pdf { background: #ef4444; color: white; }
+.btn-report:hover { transform: translateY(-1px); opacity: 0.9; }
+
+.paper-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+/* Dimensi Kertas Diatur ke Landscape (Lebar Mendatar) */
+.landscape-paper {
+    width: 297mm;
+    min-height: 210mm;
+    background: white;
+    padding: 14mm;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, .15);
+    border-radius: 10px;
+}
+
+.kop {
+    display: flex;
+    align-items: center;
+    border-bottom: 3px double #0f172a;
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+}
+
+.logo { width: 82px; height: 82px; object-fit: contain; margin-right: 18px; }
+.kop-text { flex: 1; }
+.kop-text h1 { margin: 0; font-size: 28px; color: #0f172a; font-weight: 800; line-height: 1.1; }
+.kop-text p { margin: 4px 0; font-size: 13px; color: #475569; }
+
+.judul { text-align: center; margin-bottom: 20px; }
+.judul h3 { margin: 0; font-size: 22px; color: #0f172a; font-weight: 800; text-transform: uppercase; }
+.judul p { margin-top: 8px; color: #64748b; font-size: 13px; }
+
+/* Summary Grid Laporan */
+.summary-table-masuk {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.summary-table-masuk td { border: 1px solid #cbd5e1; padding: 10px; text-align: center; font-size: 12px; }
+.summary-table-masuk .label { background: #f1f5f9; font-weight: 700; color: #334155; }
+.summary-table-masuk .value { font-weight: 700; color: #0f172a; }
+
+/* Tabel Utama Cetakan */
+.table-laporan-masuk {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-laporan-masuk thead th {
+    background: #0f172a;
+    color: white;
+    padding: 10px 6px;
+    border: 1px solid #1e293b;
+    font-size: 10px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.table-laporan-masuk tbody td {
+    border: 1px solid #cbd5e1;
+    padding: 8px 6px;
+    font-size: 10px;
+    color: #0f172a;
+    line-height: 1.5;
+    vertical-align: middle;
+}
+
+.table-laporan-masuk tbody tr:nth-child(even) { background: #f8fafc; }
+
+.badge-masuk-report {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    display: inline-block;
+    font-size: 9px;
+}
+
+.footer-laporan { margin-top: 35px; }
+.footer-info { font-size: 12px; color: #475569; margin-bottom: 30px; line-height: 1.8; }
+
+.ttd-table { width: 100%; border-collapse: collapse; }
+.ttd-table td { width: 33.33%; text-align: center; font-size: 12px; color: #0f172a; }
+.ttd-table .space { height: 85px; }
+.ttd-table .jabatan { color: #64748b; font-size: 11px; }
+
+/* =========================================================================
+   PENGATURAN PRINTING DI BROWSER
+========================================================================= */
+@media print {
+    @page {
+        size: A4 landscape; /* Memaksa engine printer merender kertas landscape mendatar */
+        margin: 10mm;
+    }
+
+    body { background: white; }
+    .hide-on-print, .action-bar { display: none !important; }
+    .report-mode-wrapper { padding: 0; background: white; }
+    
+    .paper {
+        width: 100%;
+        min-height: auto;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
+    }
+
+    .table-laporan-masuk thead th { font-size: 9px; padding: 7px 5px; }
+    .table-laporan-masuk tbody td { font-size: 9px; padding: 6px 5px; }
+}

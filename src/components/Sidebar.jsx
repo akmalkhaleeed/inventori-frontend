@@ -90,7 +90,6 @@ const Sidebar = () => {
                 {role === 'pimpinan' && (
                     <>
                         <div className="menu-header">Laporan Inventori</div>
-                        {/* URL disesuaikan menjadi /pimpinan/stok agar cocok dengan App.jsx */}
                         <NavLink to="/pimpinan/stok" className="nav-link">
                             <i className="fas fa-clipboard-list"></i> Stok Opname
                         </NavLink>

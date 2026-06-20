@@ -26,7 +26,8 @@ import BarangKeluarPetugas from "./pages/petugas/BarangKeluar";
 // IMPORT KOMPONEN PIMPINAN (BARU)
 // ==========================================
 import PimpinanDashboard from "./pages/pimpinan/PimpinanDashboard";
-import StokOpnamePimpinan from "./pages/pimpinan/StokOpname"; // <-- IMPORT FILE STOK OPNAME DI SINI
+import StokOpnamePimpinan from "./pages/pimpinan/StokOpname"; 
+import LaporanBarangMasukPimpinan from "./pages/pimpinan/LaporanBarangMasuk"; // <-- IMPORT FILE BARU DI SINI
 
 function App() {
   return (
@@ -56,7 +57,10 @@ function App() {
 
         {/* ================= RUTE PIMPINAN (BARU) ================= */}
         <Route path="/pimpinan/dashboard" element={<PimpinanDashboard />} />
-        <Route path="/pimpinan/stok" element={<StokOpnamePimpinan />} /> {/* <-- PANGGIL KOMPONEN DI SINI */}
+        <Route path="/pimpinan/stok" element={<StokOpnamePimpinan />} /> 
+        
+        {/* <-- PANGGIL KOMPONEN LAPORAN BARANG MASUK PIMPINAN DI SINI --> */}
+        <Route path="/pimpinan/laporan-masuk" element={<LaporanBarangMasukPimpinan />} /> 
         
       </Routes>
     </BrowserRouter>
