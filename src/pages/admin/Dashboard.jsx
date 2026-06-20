@@ -19,7 +19,7 @@ const AdminDashboard = () => {
                     'Accept': 'application/json'
                 };
 
-                // 1. JURUS PROMISE.ALL: Mengirim 3 kurir fetch secara bersamaan!
+                // 1. Mengirim fetch secara bersamaan
                 const [resUser, resBarang, resTransaksi] = await Promise.all([
                     fetch('http://127.0.0.1:8000/api/user', { headers }),
                     fetch('http://127.0.0.1:8000/api/barang', { headers }),
@@ -51,26 +51,14 @@ const AdminDashboard = () => {
                 const barangKritis = barangs.filter(b => Number(b.stok) <= 5).slice(0, 3);
                 setLowStock(barangKritis.length > 0 ? barangKritis : []);
 
-                // 6. Ambil 4 Transaksi Terakhir untuk tabel
+                // 6. Ambil 4 Transaksi Terakhir
                 setRecentActivities(transaksis.slice(0, 4));
 
             } catch (error) {
                 console.error("Gagal menarik data:", error);
-                loadDummyData(); 
             } finally {
                 setIsLoading(false);
             }
-        };
-
-        const loadDummyData = () => {
-            setStats({ totalStok: 1245, totalPetugas: 5, totalTransaksi: 342 });
-            setLowStock([
-                { id: 1, nama_barang: 'Proyektor Epson X500 (DUMMY)', stok: 2 },
-                { id: 2, nama_barang: 'Kertas HVS A4 70gsm (DUMMY)', stok: 5 }
-            ]);
-            setRecentActivities([
-                { id_transaksi: 1, name: 'Budi (DUMMY)', nama_barang: 'Kabel VGA 15m', jenis_transaksi: 'masuk', tanggal_transaksi: '2024-06-14T09:30:00' }
-            ]);
         };
 
         fetchSemuaData();
@@ -85,9 +73,10 @@ const AdminDashboard = () => {
 
     return (
         <MasterLayout>
+            {/* BANNER DIHAPUS BUTTON CETAKNYA */}
             <div className="admin-banner mb-4">
                 <div className="row align-items-center">
-                    <div className="col-lg-7">
+                    <div className="col-lg-12">
                         <span className="badge bg-primary bg-opacity-25 text-light mb-3 px-3 py-2 rounded-pill border border-primary">
                             Sistem Inventaris v1.0
                         </span>
@@ -95,11 +84,6 @@ const AdminDashboard = () => {
                         <p className="opacity-75 mb-0">
                             Halo, <strong className="text-warning">{userName}</strong>. Pantau pergerakan aset hari ini.
                         </p>
-                    </div>
-                    <div className="col-lg-5 text-lg-end mt-4 mt-lg-0">
-                        <button className="btn btn-light rounded-pill px-4 py-2 fw-bold shadow-sm text-dark">
-                            <i className="fas fa-file-pdf me-2 text-danger"></i>Cetak Laporan
-                        </button>
                     </div>
                 </div>
             </div>
@@ -206,19 +190,13 @@ const AdminDashboard = () => {
                                         recentActivities.map((act, index) => (
                                             <tr key={act.id_transaksi || index} className="border-bottom">
                                                 <td className="ps-3 py-3">
-                                                    {/* PERBAIKAN: Menangkap 'name' dari controller */}
                                                     <div className="fw-bold small text-dark">{act.name || 'Sistem'}</div>
-                                                    
-                                                    {/* PERBAIKAN: Menangkap 'tanggal_transaksi' yang diformat */}
                                                     <div className="small text-muted" style={{ fontSize: '11px' }}>
                                                         {formatTanggal(act.tanggal_transaksi || act.created_at)}
                                                     </div>
                                                 </td>
-                                                
                                                 <td className="small text-secondary py-3 fw-semibold">{act.nama_barang || '-'}</td>
-                                                
                                                 <td className="py-3">
-                                                    {/* PERBAIKAN: Menangkap 'jenis_transaksi' */}
                                                     <span className={`badge rounded-pill px-3 py-2 ${(act.jenis_transaksi === 'masuk') ? 'bg-success bg-opacity-10 text-success' : 'bg-danger bg-opacity-10 text-danger'}`} style={{ fontSize: '10px' }}>
                                                         {(act.jenis_transaksi || 'TERCATAT').toUpperCase()}
                                                     </span>

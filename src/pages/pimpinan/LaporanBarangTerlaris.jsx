@@ -10,7 +10,6 @@ const LaporanBarangTerlaris = () => {
     const token = localStorage.getItem('token');
     const headers = { 'Authorization': `Bearer ${token}`, 'Accept': 'application/json' };
 
-    // Fetch Transaksi dan Barang secara bersamaan
     const fetchData = async () => {
         setIsLoading(true);
         try {
@@ -35,14 +34,11 @@ const LaporanBarangTerlaris = () => {
         fetchData();
     }, []);
 
-    // Logika Agregasi: Menghitung total pengeluaran per barang & mencari Top 10
     const topItems = useMemo(() => {
         if (!transactions.length || !barangs.length) return [];
 
-        // 1. Ambil transaksi yang hanya tipe 'keluar'
         const keluar = transactions.filter(t => t.jenis_transaksi === 'keluar');
 
-        // 2. Kelompokkan berdasarkan id_barang dan jumlahkan total keluarnya
         const mapGroup = {};
         keluar.forEach(t => {
             const id = t.id_barang;
@@ -50,7 +46,6 @@ const LaporanBarangTerlaris = () => {
             mapGroup[id] += (parseInt(t.jumlah) || 0);
         });
 
-        // 3. Pasangkan dengan data nama barang & kategori dari "kamus"
         let result = Object.keys(mapGroup).map(id => {
             const brg = barangs.find(b => String(b.id_barang) === String(id));
             return {
@@ -61,24 +56,18 @@ const LaporanBarangTerlaris = () => {
             };
         });
 
-        // 4. Urutkan dari yang terbesar (DESC) dan potong (slice) hanya 10 teratas
         result.sort((a, b) => b.total_keluar - a.total_keluar);
         return result.slice(0, 10);
     }, [transactions, barangs]);
 
     return (
         <MasterLayout>
-            <div className="page-header-terlaris d-flex justify-content-between align-items-center flex-wrap shadow-sm">
+            <div className="page-header-terlaris shadow-sm">
                 <div className="position-relative z-1">
                     <h3 className="text-white fw-bold mb-1">Barang Terlaris</h3>
                     <p className="text-white opacity-75 mb-0">
                         Top 10 barang dengan penggunaan tertinggi
                     </p>
-                </div>
-                <div className="mt-3 mt-lg-0 position-relative z-1 hide-on-print">
-                    <button onClick={() => window.print()} className="btn btn-light rounded-pill px-4 fw-bold shadow-sm">
-                        <i className="fas fa-print me-2 text-primary"></i> Cetak Analisis
-                    </button>
                 </div>
             </div>
 
